@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://stoneqi2007.github.io/sitemap.xml 

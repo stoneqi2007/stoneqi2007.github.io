@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[My Octopress Blog]]></title>
+  <link href="http://stoneqi2007.github.io/atom.xml" rel="self"/>
+  <link href="http://stoneqi2007.github.io/"/>
+  <updated>2017-07-06T16:02:53+08:00</updated>
+  <id>http://stoneqi2007.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello Blog]]></title>
+    <link href="http://stoneqi2007.github.io/blog/2017/07/06/hello-blog/"/>
+    <updated>2017-07-06T15:56:59+08:00</updated>
+    <id>http://stoneqi2007.github.io/blog/2017/07/06/hello-blog</id>
+    <content type="html"><![CDATA[<p>快节奏的生活，碎片化的学习，最近感觉记东西越来越困难，很久以前就想创建博客，把平时工作或者生活中的点滴收获记录起来，今天总算开了个头，希望是个好的开始，培养好的习惯并且坚持下去，生活总会越来越好！Fighting！</p>
+]]></content>
+  </entry>
+  
+</feed>
