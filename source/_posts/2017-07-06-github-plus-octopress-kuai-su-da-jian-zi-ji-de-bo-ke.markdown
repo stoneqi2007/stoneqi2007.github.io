@@ -104,11 +104,11 @@ categories:
 
 接下来，我们就需要将本地Octopress部署到Github Pages上，一起来看看具体步骤吧
 
-1. 新建Github repository
+1. #### 新建Github repository
 
    登录个人的Github账号，新建Github repository，项目名称命名格式为username.github.io，username是你的Github用户名，例如你的Github用户名为XXXgithub，那么项目名称应该为XXXgithub.github.io，然后点击创建即可。
 
-2. 配置 Github Pages
+2. #### 配置 Github Pages
 
    在终端运行下面命令
 
@@ -125,7 +125,7 @@ categories:
 
    用户的 Github Pages使用master分支作为Web服务的公开目录，为我们的博客主页（username.github.io）提供内容显示，因此，我们需要将与博客相关的源码存到某个分支上（这里是source分支），而master分支commit生成的博客内容供Web访问，Octopress就是通过这行代码帮我们搞定这些工作的。
 
-3. 创建一篇文章
+3. #### 创建一篇文章
 
    终端执行命令
 
