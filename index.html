@@ -7,7 +7,7 @@
 	<meta name="author" content="燕小七">
 
 	
-	<meta name="description" content=" 快节奏的生活，碎片化的学习，最近感觉记东西越来越困难，很久以前就想创建博客，把平时工作或者生活中的点滴收获记录起来，今天总算开了个头，希望是个好的开始，培养好的习惯并且坚持下去，生活总会越来越好！Fighting！ Jul 6th, 2017 ">
+	<meta name="description" content="今天完成了在Mac上使用Github+Octopress搭建自己专属的博客，在网上搜了一些相关的资料，趟了一些坑，于是决定把自己搭建博客的过程记录一下。 Octopress 与 Jekyll &amp; Github Pages 的关系 Octopress 是基于Jekyll的静态博客框架 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -74,6 +74,222 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2017/07/06/github-plus-octopress-kuai-su-da-jian-zi-ji-de-bo-ke/">
+		
+			Github+Octopress 快速搭建自己的博客</a>
+	</h2>
+	<div class="entry-content">
+		<p>今天完成了在Mac上使用Github+Octopress搭建自己专属的博客，在网上搜了一些相关的资料，趟了一些坑，于是决定把自己搭建博客的过程记录一下。</p>
+
+<h3>Octopress 与 Jekyll &amp; Github Pages 的关系</h3>
+
+<ol>
+<li>Octopress 是基于Jekyll的静态博客框架</li>
+<li>Github Pages 是用于显示托管在Github的静态网页，是Github提供的服务</li>
+<li>也就是说我们是使用基于Jekyll的Octopress生成本地的静态网站，然后将静态网站托管到Github为我们提供的Github Pages 服务上，最后访问博客地址就可以显示我们的个人博客网站了</li>
+</ol>
+
+
+<h3>安装环境</h3>
+
+<ol>
+<li>Mac OS X系统（根据个人情况而定）</li>
+<li>安装ruby，由于之前安装了cocoaPods，所以已经有ruby，一般来说，Mac OS X都是自带ruby的，这里对于安装ruby的过程不再多做介绍</li>
+</ol>
+
+
+<h3>本地安装Octopress</h3>
+
+<ol>
+<li><h4>将Octopress的项目clone到本地，终端执行命令行</h4>
+
+<pre><code>$ git clone git://github.com/imathis/octopress.git octopress
+</code></pre>
+
+<p>进入octopress目录</p>
+
+<pre><code>$ cd octopress
+</code></pre></li>
+<li><h4>安装Octopress所需要的依赖库（dependencies）</h4>
+
+<p>安装过程中可能遇到权限问题，所以需要在命令行前面加sudo再执行，并输入登录密码。</p>
+
+<blockquote><p>注：<code>sudo</code> 全称是：<code>super user do</code>，也就是以 root 用户身份来执行</p></blockquote>
+
+<pre><code>$ sudo gem install bundler
+$ bundle install
+</code></pre>
+
+<p>这里在不翻墙的情况下，可能会遇到一个问题：<code>sudo gem install bundler</code> 执行后，一直没有响应。这是由于国内网络原因（你懂的），导致rubygems.org存放在 Amazon S3 上面的资源文件间歇性连接失败。所以你会遇到<code>gem install rack</code>或<code>bundle install</code> 的时候半天没有响应的情况。</p>
+
+<p>但好消息是国内某大神帮我们解决了这一心头大患，我们可以用淘宝的Ruby镜像来替换原来的镜像。只需终端执行下面的命令即可：</p>
+
+<pre><code>$ gem sources -a https://ruby.taobao.org/ -r https://rubygems.org/
+</code></pre>
+
+<p>然后执行如下命令查看切换后结果</p>
+
+<pre><code>$ gem sources -l
+</code></pre>
+
+<p>如果看到如下输出：</p>
+
+<pre><code>*** CURRENT SOURCES ***
+https://ruby.taobao.org
+</code></pre>
+
+<p>这就说明我们切换到淘宝的 Ruby 镜像了，再次安装 Octopress 所需要的依赖库就会发现成功啦。</p>
+
+<p>当然还有另外两种方法:</p>
+
+<ol>
+<li><p>比较原始的方法 -> 动更改：打开 <code>octopress/Gemfile</code>文件 -> 将 <code>source "https://rubygems.org"</code> 改为 <code>source "https://ruby.taobao.org"</code>就可以了</p></li>
+<li><p>相对方便点，因为我们使用的是 Gemfile，所以我们可以用 Bundler 的 Gem 源代码镜像命令，这样我们就不用改 Gemfile 的 source 了。命令如下：</p>
+
+<pre><code>$ cd octopress
+$ bundle config mirror.https://rubygems.org https://ruby.taobao.org
+</code></pre></li>
+</ol>
+</li>
+<li><h4>安装默认主题</h4>
+
+<p>终端执行下面命令，可以安装默认主题，当然也可以安装第三方的主题，这个留到下篇再详解。</p>
+
+<pre><code> $ rake install
+</code></pre></li>
+<li><h4>内容预览</h4>
+
+<p>到这里，我们已经在本地搭建好了一个简版的Octopress博客，是不是迫不及待的想看看效果，那就运行命令吧！</p>
+
+<pre><code> $ rake preview
+</code></pre>
+
+<p>此时打开浏览器，输入localhost:4000，你就可以看到效果了，至此，本地Octopress安装过程就结束了。</p>
+
+<p><img src="../images/2017/07/635689-9a554909effc43fe.jpg" alt="" /></p></li>
+</ol>
+
+
+<h3>本地的Octopress博客部署到Github Pages</h3>
+
+<p>接下来，我们就需要将本地Octopress部署到Github Pages上，一起来看看具体步骤吧</p>
+
+<ol>
+<li><p>新建Github repository</p>
+
+<p>登录个人的Github账号，新建Github repository，项目名称命名格式为username.github.io，username是你的Github用户名，例如你的Github用户名为XXXgithub，那么项目名称应该为XXXgithub.github.io，然后点击创建即可。</p></li>
+<li><p>配置 Github Pages</p>
+
+<p>在终端运行下面命令</p>
+
+<pre><code>$ cd octopress
+$ rake setup_github_pages
+</code></pre>
+
+<p>该命令会要求我们输入github仓库的url，复制粘贴一下新建仓库的SSH 或 HTTPS URL 即可，因为SSH需要注意配置SSH Key的问题，所以在此处我选择了HTTPS URL。</p>
+
+<p>很多人也许会疑问，Octopress生成的静态页面是怎么与GitHub绑定的呢？</p>
+
+<p>对的，就是rake setup_github_pages这行代码，那么它是怎么实现的呢？</p>
+
+<p>用户的 Github Pages使用master分支作为Web服务的公开目录，为我们的博客主页（username.github.io）提供内容显示，因此，我们需要将与博客相关的源码存到某个分支上（这里是source分支），而master分支commit生成的博客内容供Web访问，Octopress就是通过这行代码帮我们搞定这些工作的。</p></li>
+<li><p>创建一篇文章</p>
+
+<p>终端执行命令</p>
+
+<pre><code>$ rake new_post["title"]    #title为你的文章名，可随意更改
+</code></pre>
+
+<p>生成的新文章在source/_post目录下，我们可以用Markdown编辑器对文章进行编辑修改。</p>
+
+<p>打开目录下的markdown文件（我目前用的Typora），会发现头部有如下内容（千万不可删除！！）</p>
+
+<pre><code>layout: post
+title: "Github+Octopress 快速搭建自己的博客"
+date: 2017-07-06 18:44:14 +0800
+comments: true
+categories: 
+</code></pre>
+
+<p>下面我们就可以编辑自己的正文内容了。</p>
+
+<p>正文编辑完成以后，终端运行如下命令即可生成静态网页</p>
+
+<pre><code>$ rake generate
+</code></pre>
+
+<p>如果你想预览内容的话，则终端运行命令</p>
+
+<pre><code>$ rake preview
+</code></pre>
+
+<p>此时，你可以在浏览器输入localhost:4000查看实际效果，如果没有问题的话，就可以将静态网页同步到GitHub上，终端运行命令</p>
+
+<pre><code>$ rake deploy
+</code></pre>
+
+<blockquote><p>注意了，在这里我遇到了一个坑，每次执行rake deploy的时候，就会提示</p>
+
+<p> ! [rejected]        master -> master (non-fast-forward)</p>
+
+<p>error: failed to push some refs to &lsquo;<a href="https://github.com/stoneqi2007/stoneqi2007.github.io.git">https://github.com/stoneqi2007/stoneqi2007.github.io.git</a>&rsquo;</p>
+
+<p>hint: Updates were rejected because the tip of your current branch is behind</p>
+
+<p>hint: its remote counterpart. Integrate the remote changes (e.g.</p>
+
+<p>hint: &lsquo;git pull &hellip;&rsquo;) before pushing again.</p>
+
+<p>hint: See the &lsquo;Note about fast-forwards&rsquo; in &lsquo;git push &ndash;help&rsquo; for details.</p>
+
+<p>在网上找了好久，最后找到解决办法：</p>
+
+<p>$ cd octopress</p>
+
+<p>打开Rakefile文件，找到system &ldquo;git push origin #{deploy_branch}"，在#前面加+，然后保存文件</p>
+
+<p>重新执行$ rake deploy即可解决。</p></blockquote>
+
+<p>你会看到静态页面已经被push到GitHub的master分支，然后等待几秒钟，访问博客主页username.github.io，就可以看到你创建的博客了。</p>
+
+<p>如果你还想把自己的本地资源也同步到GitHub上，那么终端运行指令</p>
+
+<pre><code>$ git add .
+$ git commit -m "comment"  #comment可随意更改
+$ git push origin source
+</code></pre>
+
+<p>这样本地的资源文件就上传到GitHub的source分支了。</p>
+
+<blockquote><p>注意：<code>rake preview</code> 会自动监视文件的变化，重新生成静态页面。因此修改markdown文件后，只需要在浏览器里刷新一下页面，就立刻可以看到效果。不过如果修改了_config.yml的话，则需要<code>Ctrl+C</code>终止，用 <code>rake generate</code> 重新生成，才能看到效果。</p></blockquote>
+
+<p>至此，我们就完成了个人博客的搭建，当然此时的博客略显简陋，我们可以根据自己的喜好重新包装自己的博客，至于怎么个性化定制自己的博客，会在后续的文章中给出。</p></li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+Jul 6th, 2017</div>
+	<div class="tags">
+
+</div>
+	
+</div>
+</article>
 
 
     <article class="post">
